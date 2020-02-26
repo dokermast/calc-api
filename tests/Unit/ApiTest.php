@@ -3,11 +3,6 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Http\Request;
-
 
 class ApiTest extends TestCase
 {
@@ -39,7 +34,6 @@ class ApiTest extends TestCase
         $params = json_decode($params, true);
         $url = '/api/count';
         $response = $this->postJson($url, $params);
-        $content = $response->getContent();
         $response->assertSeeText('checkoutPrice');
     }
 

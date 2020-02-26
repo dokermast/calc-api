@@ -15,7 +15,6 @@ class CalcController extends Controller
         $result = $this->getInput($request)['result'];
         if ($result) {
             if ($this->checkJson($this->getInput($request)['input'])) {
-
                 $output = $this->calc($this->getInput($request)['input']);
                 $outArray = [
                     "checkoutPrice" => $output['checkoutPrice'],
@@ -72,7 +71,6 @@ class CalcController extends Controller
         $items = $input['items'];
         $rates = $this->getRates();
         $sum = null;
-
         foreach ($items as $item) {
             $sum = $sum +  $item['price'] / $rates[$item['currency']] * $item['quantity'];
         }
@@ -117,7 +115,6 @@ class CalcController extends Controller
                 }
             }
         }
-
         if (count($res) != 0 && !in_array(false, $res)) {
 
             return true;
