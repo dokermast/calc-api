@@ -16,7 +16,12 @@ class CalcController extends Controller
         if ($result) {
             if ($this->checkJson($this->getInput($request)['input'])) {
 
-                return ['amount' => $this->calc($this->getInput($request)['input'])];
+                $output = $this->calc($this->getInput($request)['input']);
+
+                return [
+                    "checkoutPrice" => $output['checkoutPrice'],
+                    "checkoutCurrency" => $output['checkoutCurrency']
+                ];
             }
 
             return  ['message' => "WRONG JSON ITEMS"];
@@ -58,7 +63,7 @@ class CalcController extends Controller
 
     /**
      * @param $input
-     * @return float
+     * @return array
      */
     private function calc($input)
     {
@@ -71,7 +76,10 @@ class CalcController extends Controller
             $sum = $sum +  $item['price'] / $rates[$item['currency']] * $item['quantity'];
         }
 
-        return  round($sum * $rates[$base_currency], 2);
+        return  [
+            "checkoutPrice" => round($sum * $rates[$base_currency], 2),
+            "checkoutCurrency" =>  $base_currency
+        ];
     }
 
     /**

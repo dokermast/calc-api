@@ -40,7 +40,7 @@ class ApiTest extends TestCase
         $url = '/api/count';
         $response = $this->postJson($url, $params);
         $content = $response->getContent();
-        $response->assertSeeText('amount');
+        $response->assertSeeText('checkoutPrice');
     }
 
     /**
