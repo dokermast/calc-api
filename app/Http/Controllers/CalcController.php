@@ -12,14 +12,18 @@ class CalcController extends Controller
      */
     public function getCount(Request $request)
     {
-        $input = $this->getInput($request);
+        $result = $this->getInput($request)['result'];
+        if ($result) {
+            if ($this->checkJson($this->getInput($request)['input'])) {
 
-        if ($this->checkJson($input)) {
+                return ['amount' => $this->calc($this->getInput($request)['input'])];
+            }
 
-            return [ 'amount' => $this->calc($this->getInput($request))];
+            return  ['message' => "WRONG JSON ITEMS"];
+        } else {
+
+            return  ['message' => $this->getInput($request)['message']];
         }
-
-        return  $this->sendErrorMessage('INPUT JSON IS WRONG');
     }
 
     /**
@@ -32,14 +36,23 @@ class CalcController extends Controller
             if (!empty($request->json()->all())) {
                 $input = $request->json()->all();
 
-                return $input;
+                return [
+                    'result' => true,
+                    'input' => $input
+                ];
             } else {
 
-               return  $this->sendErrorMessage('INPUT JSON IS WRONG');
+               return  [
+                   'result' => false,
+                   'message' => 'INPUT JSON IS WRONG OR EMPTY!'
+               ];
             }
         } else {
 
-            return  $this->sendErrorMessage('INPUT METHOD IS NOT POST');
+            return  [
+                'result' => false,
+                'message' => 'INPUT METHOD IS NOT POST'
+            ];
         }
     }
 
@@ -64,7 +77,7 @@ class CalcController extends Controller
     /**
      * @return mixed
      */
-    public function getRates()
+    private function getRates()
     {
         $OPX_API_ID = env("OPX_API_ID");
         $request = 'https://openexchangerates.org/api/latest.json?app_id='.$OPX_API_ID;
@@ -78,7 +91,7 @@ class CalcController extends Controller
      * @param $data
      * @return bool
      */
-    public function checkJson($data)
+    private function checkJson($data)
     {
         $keys = [
             [ "items", "checkoutCurrency"],
@@ -102,14 +115,5 @@ class CalcController extends Controller
         }
 
         return false;
-    }
-
-    /**
-     * @param $message
-     * @return array
-     */
-    public function sendErrorMessage($message)
-    {
-        return ['message' => $message];
     }
 }
