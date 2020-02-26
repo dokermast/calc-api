@@ -8,7 +8,7 @@ class CalcController extends Controller
 {
     /**
      * @param Request $request
-     * @return array
+     * @return string
      */
     public function getCount(Request $request)
     {
@@ -17,17 +17,18 @@ class CalcController extends Controller
             if ($this->checkJson($this->getInput($request)['input'])) {
 
                 $output = $this->calc($this->getInput($request)['input']);
-
-                return [
+                $outArray = [
                     "checkoutPrice" => $output['checkoutPrice'],
                     "checkoutCurrency" => $output['checkoutCurrency']
                 ];
+
+                return json_encode($outArray);
             }
 
-            return  ['message' => "WRONG JSON ITEMS"];
+            return  json_encode(['message' => "WRONG JSON ITEMS"]);
         } else {
 
-            return  ['message' => $this->getInput($request)['message']];
+            return  json_encode(['message' => $this->getInput($request)['message']]);
         }
     }
 
