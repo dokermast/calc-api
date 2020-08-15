@@ -17,18 +17,18 @@ request method: POST
 
 input data format :
 
-        {
-          "items": {
-            "42": {
-              "currency": "EUR",
-              "price": 49.99,
-              "quantity": 1
-            },
-            "55": {
-              "currency": "USD",
-              "price": 12,
-              "quantity": 3
-            }
-          },
-          "checkoutCurrency": "EUR"
-        }
+{
+  "items": {
+    "42": {
+      "currency": "EUR",
+      "price": 49.99,
+      "quantity": 1
+    },
+    "55": {
+      "currency": "USD",
+      "price": 12,
+      "quantity": 3
+    }
+  },
+  "checkoutCurrency": "EUR"
+}
