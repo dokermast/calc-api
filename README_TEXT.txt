@@ -1,6 +1,6 @@
 ==== INSTALL API
 
-gil clone https://github.com/dokermast/calc-api.git
+gil clone https://github.com/dokermast/countapi.git
 
 composer install
 
@@ -32,3 +32,11 @@ input data format :
   },
   "checkoutCurrency": "EUR"
 }
+
+=============================
+
+This is an application for calculating the total value of goods in different currencies.
+It receives data for each product (currency, price, quantity) and returns
+the amount in the selected currency.
+
+============================
