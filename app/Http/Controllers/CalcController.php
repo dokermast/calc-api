@@ -84,7 +84,7 @@ class CalcController extends Controller
     /**
      * @return mixed
      */
-    private function getRates()
+    public function getRates()
     {
         $OPX_API_ID = env("OPX_API_ID");
         $request = 'https://openexchangerates.org/api/latest.json?app_id='.$OPX_API_ID;
