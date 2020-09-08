@@ -62,15 +62,27 @@
                         </pre>
                     </h5>
                 </div>
+
+                <h5 class="card-title">Response example:</h5>
+                <div class="container text-left bg-black">
+                    <h5>
+                    <pre>
+                        {
+                            "checkoutPrice":80.52,
+                            "checkoutCurrency":"EUR"
+                        }
+                    </pre>
+                    </h5>
+                </div>
             </div>
+
             <div class="text-center">
                 <a href="https://reqbin.com/" class="btn btn-outline-primary" target="_blank">Send This request</a>
             </div>
             <br>
         </div>
     </div>
-
-
+    
     <div class="container item">
         <div class="card">
             <h5 class="card-header bg-lgrey">This is an API gets currencies rates from free api.</h5>
